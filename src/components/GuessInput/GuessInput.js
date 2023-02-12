@@ -1,23 +1,23 @@
 import React from "react";
 
-function GuessInput({ guesses, setGuesses }) {
-  const [guess, setGuess] = React.useState("");
+function GuessInput({ handleSubmitGuess }) {
+  const [tentativeGuess, setTentativeGuess] = React.useState("");
 
   function handleInput(event) {
-    const nextGuess = event.target.value.toUpperCase();
-    setGuess(nextGuess);
+    const nextTentativeGuess = event.target.value; //.toUpperCase();
+    setTentativeGuess(nextTentativeGuess);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (guess.length !== 5) {
+    if (tentativeGuess.length !== 5) {
       alert("Guess needs to be 5 letters!");
       return;
     }
 
-    setGuesses([...guesses, { id: crypto.randomUUID(), value: guess }]);
-    setGuess("");
+    handleSubmitGuess(tentativeGuess);
+    setTentativeGuess("");
   }
 
   return (
@@ -32,7 +32,7 @@ function GuessInput({ guesses, setGuesses }) {
         required
         minLength={5}
         maxLength={5}
-        value={guess}
+        value={tentativeGuess}
         onChange={(event) => handleInput(event)}
       />
     </form>
