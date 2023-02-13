@@ -4,19 +4,14 @@ function GuessInput({ handleSubmitGuess }) {
   const [tentativeGuess, setTentativeGuess] = React.useState("");
 
   function handleInput(event) {
-    const nextTentativeGuess = event.target.value; //.toUpperCase();
-    setTentativeGuess(nextTentativeGuess);
+    setTentativeGuess(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (tentativeGuess.length !== 5) {
-      alert("Guess needs to be 5 letters!");
-      return;
-    }
-
-    handleSubmitGuess(tentativeGuess);
+    const nextTentativeGuess = tentativeGuess.toUpperCase();
+    handleSubmitGuess(nextTentativeGuess);
     setTentativeGuess("");
   }
 
@@ -30,8 +25,9 @@ function GuessInput({ handleSubmitGuess }) {
         id="guess-input"
         type="text"
         required
-        minLength={5}
+        pattern="[a-zA-Z]{5}"
         maxLength={5}
+        title="5 letter word"
         value={tentativeGuess}
         onChange={(event) => handleInput(event)}
       />
