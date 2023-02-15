@@ -2,7 +2,6 @@ import React from "react";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
-import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 import GuessInput from "../GuessInput/GuessInput";
 import GuessResult from "../GuessResult/GuessResult";
@@ -16,18 +15,17 @@ function Game() {
   const [guesses, setGuesses] = React.useState([]);
 
   function handleSubmitGuess(value) {
-    if (guesses.length === NUM_OF_GUESSES_ALLOWED) {
-      alert("Max number of guesses reached!");
-      return;
-    }
-
     setGuesses([...guesses, value]);
   }
 
   return (
     <>
       <GuessResult guesses={guesses} answer={answer} />
-      <GuessInput handleSubmitGuess={handleSubmitGuess} />
+      <GuessInput
+        handleSubmitGuess={handleSubmitGuess}
+        answer={answer}
+        guesses={guesses}
+      />
     </>
   );
 }
